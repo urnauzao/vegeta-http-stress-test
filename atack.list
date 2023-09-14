@@ -1,0 +1,4 @@
+GET https://nginx.urnau.com.br
+GET https://nginx.urnau.com.br/123321321
+# GET https://example.com/api/endpoint
+# GET https://example.com/another/endpoint
