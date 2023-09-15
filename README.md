@@ -4,6 +4,9 @@ https://github.com/tsenart/vegeta
 - Selecione seu Binários:
 https://github.com/tsenart/vegeta/releases
 
+- Vídeo Tutorial
+[https://youtu.be/FNj0e1ZT4fI](https://youtu.be/FNj0e1ZT4fI)
+
 - Clonando o binário
 > curl -LO https://github.com/tsenart/vegeta/releases/download/v12.11.0/vegeta_12.11.0_linux_386.tar.gz
 
@@ -26,7 +29,25 @@ https://github.com/tsenart/vegeta/releases
 > vegeta attack -duration=30s -rate=100 -targets=atack.list | vegeta encode | jq -c 'del(.body,.headers)' | vegeta encode > results.json
 
 - Gerar gráfico da saída
-vegeta plot -title='Teste de Ataque' results.json > results.html
+> vegeta plot -title='Teste de Ataque' results.json > results.html
+
+- Outros comandos
+> vegeta attack -duration=30s -rate=1000 -name='Second' -tar
+> gets=atack.list | vegeta encode | jq -c 'del(.body,.headers)'
+> | vegeta encode > results2.json
+> ###
+> vegeta plot -title='Teste de Ataque' results.json results2.json > results2.html
+
+> ###
+> echo "GET https://nginx.urnau.com.br"| vegeta attack -duration=20s -rate=5000 -name="5k" | vegeta report -type=json
+```json
+{"latencies":{"total":56333143851600,"mean":563331438,"50th":60648,"90th":1412939033,"95th":1833621254,"99th":4292365164,"max":5075331800,"min":18900},"bytes_in":{"total":41545340,"mean":415.4534},"bytes_out":{"total":0,"mean":0},"earliest":"2023-09-14T23:53:50.4863227Z","latest":"2023-09-14T23:54:10.4866898Z","end":"2023-09-14T23:54:12.6219268Z","duration":20000367100,"wait":2135237000,"requests":100000,"rate":4999.9082266845,"throughput":1858.2732061059949,"success":0.41134,"status_codes":{"0":58866,"200":41134},"errors":["Get \"https://nginx.urnau.com.br\": dial tcp 0.0.0.0:0-\u003e191.101.1.112:443: socket: too many open files"]}
+```
+
+# Cheque a quantidade de arquivos que podem estar abertos no seu sistema operacional
+- Isto pode causar HTTP Status Code 0
+> ulimit -n
+
 
 # Instalar o JQ para edição do output
 > sudo apt install jq
